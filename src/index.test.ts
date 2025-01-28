@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import defineConfig from './index.mjs';
+import defineConfig from '.';
 
 test('load config', () => {
   expect(() => defineConfig()).not.toThrow();

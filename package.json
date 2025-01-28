@@ -31,7 +31,7 @@
   },
   "keywords": [],
   "lint-staged": {
-    "*.{js,json,mjs}": "prettier --write",
+    "*.{json,ts}": "prettier --write",
     "package.json": [
       "prettier --write",
       "npm run lint-fix:prettier-package-json"
