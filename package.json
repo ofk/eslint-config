@@ -6,11 +6,15 @@
   "author": "ofk (https://github.com/ofk/)",
   "main": "index.js",
   "scripts": {
+    "lint": "run-s lint:*",
+    "lint:eslint": "eslint .",
     "lint-fix": "run-s lint-fix:*",
+    "lint-fix:eslint": "eslint --fix .",
     "lint-fix:prettier": "prettier --write .",
     "lint-fix:prettier-package-json": "prettier-package-json --write",
     "prepare": "husky",
-    "test": "vitest run"
+    "test": "run-s lint test:*",
+    "test:vitest": "vitest run"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -24,7 +28,7 @@
   },
   "keywords": [],
   "lint-staged": {
-    "*.{js,json}": "prettier --write",
+    "*.{js,json,mjs}": "prettier --write",
     "package.json": [
       "prettier --write",
       "npm run lint-fix:prettier-package-json"
