@@ -159,20 +159,30 @@ export const jsStrict = pluginTs.config(
 );
 
 export function js({
-  globals = true,
+  globals = {},
   ...config
-}: Pick<ConfigWithExtends, 'extends' | 'rules'> & { globals?: boolean }) {
-  return pluginTs.config(
-    globals
-      ? {
-          languageOptions: {
-            globals: {
-              ...globalVariables.es2025,
-            },
-          },
-        }
-      : {},
-    jsStrict,
-    config,
-  );
+}: Pick<ConfigWithExtends, 'extends' | 'rules'> & {
+  globals?: false | Parameters<typeof jsGlobals>[0];
+}) {
+  return pluginTs.config(globals ? jsGlobals(globals) : {}, jsStrict, config);
+}
+
+export function jsGlobals({
+  browser = true,
+  es2024 = true,
+  node = true,
+}: {
+  browser?: boolean;
+  es2024?: boolean;
+  node?: boolean;
+}) {
+  return pluginTs.config({
+    languageOptions: {
+      globals: {
+        ...(es2024 ? globalVariables.es2024 : {}),
+        ...(browser ? globalVariables.browser : {}),
+        ...(node ? globalVariables.node : {}),
+      },
+    },
+  });
 }
