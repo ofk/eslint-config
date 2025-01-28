@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "ofk (https://github.com/ofk/)",
