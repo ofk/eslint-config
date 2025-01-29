@@ -96,9 +96,9 @@ test('have the right rule boundaries', () => {
 test('define all rules', () => {
   expect(diffRules([pluginJs.configs.all], createConfig({ js: {} }))).toEqual([]);
   expect(diffRules(pluginTs.configs.all, createConfig({ js: {}, ts: {} }))).toEqual([]);
-  expect(diffRules([getAllRules('import/', pluginImport)], createConfig({ imports: {} }))).toEqual(
-    [],
-  );
+  expect(diffRules([getAllRules('import/', pluginImport)], createConfig({ imports: {} }))).toEqual([
+    'import/imports-first',
+  ]);
   expect(
     diffRules(
       [getAllRules('unused-imports/', pluginUnusedImports)],
