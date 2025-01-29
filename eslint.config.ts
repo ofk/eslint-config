@@ -4,6 +4,7 @@ import defineConfig from './src';
 
 export default defineConfig({
   extends: [configPrettier],
+  ignores: ['dist/'],
   imports: {
     defaultExportFiles: ['src/*.ts'],
   },
