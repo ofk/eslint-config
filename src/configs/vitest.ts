@@ -1,5 +1,7 @@
+import type { ConfigWithExtends } from 'typescript-eslint';
+
 import pluginVitest from '@vitest/eslint-plugin';
-import pluginTs, { ConfigWithExtends } from 'typescript-eslint';
+import pluginTs from 'typescript-eslint';
 
 // see https://github.com/vitest-dev/eslint-plugin-vitest?tab=readme-ov-file#rules
 export const vitestStrict = pluginTs.config(pluginVitest.configs.recommended, {

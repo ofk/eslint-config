@@ -1,6 +1,8 @@
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
+import type { ConfigWithExtends } from 'typescript-eslint';
+
 import pluginReact from 'eslint-plugin-react';
-import pluginTs, { ConfigWithExtends } from 'typescript-eslint';
+import pluginTs from 'typescript-eslint';
 
 // see https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
 export const reactStrict = pluginTs.config(pluginReact.configs.flat.recommended as Linter.Config, {

@@ -1,5 +1,7 @@
+import type { ConfigWithExtends } from 'typescript-eslint';
+
 import pluginImport from 'eslint-plugin-import';
-import pluginTs, { ConfigWithExtends } from 'typescript-eslint';
+import pluginTs from 'typescript-eslint';
 
 // see https://github.com/import-js/eslint-plugin-import?tab=readme-ov-file#rules
 export const importsStrict = pluginTs.config(pluginImport.flatConfigs.recommended, {

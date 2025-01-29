@@ -1,7 +1,9 @@
+import type { ConfigWithExtends } from 'typescript-eslint';
+
 import pluginJs from '@eslint/js';
 import confusingBrowserGlobals from 'confusing-browser-globals';
 import globalVariables from 'globals';
-import pluginTs, { ConfigWithExtends } from 'typescript-eslint';
+import pluginTs from 'typescript-eslint';
 
 // see https://eslint.org/docs/latest/rules/
 export const jsStrict = pluginTs.config(

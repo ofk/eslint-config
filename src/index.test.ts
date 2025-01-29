@@ -1,13 +1,15 @@
+import type { ESLint } from 'eslint';
+import type { ConfigArray } from 'typescript-eslint';
+
 import pluginJs from '@eslint/js';
 import pluginVitest from '@vitest/eslint-plugin';
-import { ESLint } from 'eslint';
 import pluginImport from 'eslint-plugin-import';
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginReactRefresh from 'eslint-plugin-react-refresh';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
-import pluginTs, { ConfigArray } from 'typescript-eslint';
+import pluginTs from 'typescript-eslint';
 import { expect, test } from 'vitest';
 
 import defineConfig from '.';

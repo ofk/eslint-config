@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
+
 import pluginPerfectionist from 'eslint-plugin-perfectionist';
 import pluginTs from 'typescript-eslint';
 

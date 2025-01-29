@@ -1,4 +1,6 @@
-import pluginTs, { ConfigWithExtends } from 'typescript-eslint';
+import type { ConfigWithExtends } from 'typescript-eslint';
+
+import pluginTs from 'typescript-eslint';
 
 import {
   eslintCommentsStrict,
