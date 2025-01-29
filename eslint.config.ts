@@ -6,5 +6,6 @@ export default defineConfig({
   extends: [configPrettier],
   rules: {
     '@typescript-eslint/no-empty-object-type': 'off',
+    'no-use-before-define': 'off',
   },
 });

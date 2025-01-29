@@ -1,3 +1,4 @@
+/* eslint-disable init-declarations, no-duplicate-imports */
 // After this change is applied, this definition will be removed.
 // https://github.com/eslint-community/eslint-plugin-eslint-comments/pull/246
 declare module '@eslint-community/eslint-plugin-eslint-comments/configs' {
