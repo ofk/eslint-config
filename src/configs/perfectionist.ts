@@ -3,6 +3,16 @@ import { Linter } from 'eslint';
 import pluginPerfectionist from 'eslint-plugin-perfectionist';
 import pluginTs from 'typescript-eslint';
 
+function mergeRuleOptions(
+  rule: Linter.RuleEntry | undefined,
+  options: object,
+): Linter.RuleEntry | undefined {
+  if (Array.isArray(rule)) {
+    return [rule[0], { ...rule[1], ...options }];
+  }
+  return rule;
+}
+
 function mergeConfig(config: Linter.Config, options: object): Linter.Config {
   return {
     ...config,
@@ -15,16 +25,6 @@ function mergeConfig(config: Linter.Config, options: object): Linter.Config {
         )
       : undefined,
   };
-}
-
-function mergeRuleOptions(
-  rule: Linter.RuleEntry | undefined,
-  options: object,
-): Linter.RuleEntry | undefined {
-  if (Array.isArray(rule)) {
-    return [rule[0], { ...rule[1], ...options }];
-  }
-  return rule;
 }
 
 // see https://perfectionist.dev/rules
@@ -74,6 +74,13 @@ export const perfectionistStrict = pluginTs.config(
           groups: ['unknown', 'nullish'],
         },
       ),
+    },
+  },
+  {
+    rules: {
+      // disable sorting of method definitions that conflict with no-use-before-define
+      'perfectionist/sort-classes': 'off',
+      'perfectionist/sort-modules': 'off',
     },
   },
   {

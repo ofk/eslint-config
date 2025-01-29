@@ -26,10 +26,20 @@ function createConfig(options: Parameters<typeof defineConfig>[0]) {
   });
 }
 
-function diffRules(a: ConfigArray, b: ConfigArray): string[] {
-  return [
-    ...new Set(Object.keys(getRules(a))).difference(new Set(Object.keys(getRules(b)))),
-  ].toSorted();
+function getRules(configArray: ConfigArray): Record<string, string> {
+  const rules: Record<string, string> = {};
+  configArray.forEach((config) => {
+    if (config.rules) {
+      Object.entries(config.rules).forEach(([name, rule]) => {
+        const level = Array.isArray(rule) ? rule[0] : rule;
+        const severity = typeof level === 'number' ? ['off', 'warn', 'error'][level] : level;
+        if (severity) {
+          rules[name] = severity;
+        }
+      });
+    }
+  });
+  return rules;
 }
 
 function getAllRules(prefix: string, plugin: ESLint.Plugin): ConfigArray[number] {
@@ -53,20 +63,10 @@ function getRulePrefixes(configArray: ConfigArray): string[] {
   return [...prefixes].toSorted();
 }
 
-function getRules(configArray: ConfigArray): Record<string, string> {
-  const rules: Record<string, string> = {};
-  configArray.forEach((config) => {
-    if (config.rules) {
-      Object.entries(config.rules).forEach(([name, rule]) => {
-        const level = Array.isArray(rule) ? rule[0] : rule;
-        const severity = typeof level === 'number' ? ['off', 'warn', 'error'][level] : level;
-        if (severity) {
-          rules[name] = severity;
-        }
-      });
-    }
-  });
-  return rules;
+function diffRules(a: ConfigArray, b: ConfigArray): string[] {
+  return [
+    ...new Set(Object.keys(getRules(a))).difference(new Set(Object.keys(getRules(b)))),
+  ].toSorted();
 }
 
 test('load config', () => {

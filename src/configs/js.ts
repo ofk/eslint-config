@@ -211,15 +211,6 @@ export const jsStrict = pluginTs.config(
   },
 );
 
-export function js({
-  globals = {},
-  ...config
-}: Pick<ConfigWithExtends, 'extends' | 'rules'> & {
-  globals?: false | Parameters<typeof jsGlobals>[0];
-}) {
-  return pluginTs.config(globals ? jsGlobals(globals) : {}, jsStrict, config);
-}
-
 export function jsGlobals({
   browser = true,
   es2024 = true,
@@ -238,4 +229,13 @@ export function jsGlobals({
       },
     },
   });
+}
+
+export function js({
+  globals = {},
+  ...config
+}: Pick<ConfigWithExtends, 'extends' | 'rules'> & {
+  globals?: false | Parameters<typeof jsGlobals>[0];
+}) {
+  return pluginTs.config(globals ? jsGlobals(globals) : {}, jsStrict, config);
 }
