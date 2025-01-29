@@ -105,7 +105,10 @@ test('define all rules', () => {
       createConfig({ unusedImports: {} }),
     ),
   ).toEqual([]);
-  expect(diffRules([getAllRules('react/', pluginReact)], createConfig({ react: {} }))).toEqual([]);
+  expect(diffRules([getAllRules('react/', pluginReact)], createConfig({ react: {} }))).toEqual([
+    'react/jsx-sort-default-props',
+    'react/jsx-space-before-closing',
+  ]);
   expect(
     diffRules([getAllRules('react-hooks/', pluginReactHooks)], createConfig({ react: {} })),
   ).toEqual([]);
