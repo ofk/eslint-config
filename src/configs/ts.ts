@@ -4,24 +4,16 @@ import type { ConfigWithExtends } from 'typescript-eslint';
 import pluginTs from 'typescript-eslint';
 
 // see https://typescript-eslint.io/rules/
-export const tsStrict = pluginTs.config(
-  pluginTs.configs.strictTypeChecked,
-  pluginTs.configs.stylisticTypeChecked,
+const tsRecommendedOverride = pluginTs.config(
+  // override rules in recommended
   {
     rules: {
-      // override no-empty-function in stylistic
-      '@typescript-eslint/no-empty-function': 'warn',
-      // override no-empty-object-type in strict
+      // override no-empty-object-type in recommended
       '@typescript-eslint/no-empty-object-type': [
         'error',
         { allowInterfaces: 'with-single-extends' },
       ],
-      // override no-unnecessary-condition in strict
-      '@typescript-eslint/no-unnecessary-condition': [
-        'error',
-        { allowConstantLoopConditions: true },
-      ],
-      // override no-unused-vars in strict
+      // override no-unused-vars in recommended
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -31,6 +23,33 @@ export const tsStrict = pluginTs.config(
           varsIgnorePattern: '^_',
         },
       ],
+    },
+  },
+  // best practices
+  {
+    rules: {
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      'no-duplicate-imports': 'off', // confilict with @typescript-eslint/consistent-type-imports
+    },
+  },
+);
+
+export const tsRecommended = pluginTs.config(pluginTs.configs.recommended, tsRecommendedOverride);
+
+export const tsStrict = pluginTs.config(
+  pluginTs.configs.strictTypeChecked,
+  pluginTs.configs.stylisticTypeChecked,
+  tsRecommendedOverride,
+  {
+    rules: {
+      // override no-empty-function in stylistic
+      '@typescript-eslint/no-empty-function': 'warn',
+      // override no-unnecessary-condition in strict
+      '@typescript-eslint/no-unnecessary-condition': [
+        'error',
+        { allowConstantLoopConditions: true },
+      ],
       // override prefer-for-of in stylistic
       '@typescript-eslint/prefer-for-of': 'off', // disallow for-of
     },
@@ -39,8 +58,6 @@ export const tsStrict = pluginTs.config(
     rules: {
       '@typescript-eslint/class-methods-use-this': 'error',
       '@typescript-eslint/consistent-return': 'off', // disabled because tsc checks
-      '@typescript-eslint/consistent-type-exports': 'error',
-      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/default-param-last': 'error',
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
@@ -86,7 +103,6 @@ export const tsStrict = pluginTs.config(
       'init-declarations': 'off',
       'max-params': 'off',
       'no-dupe-class-members': 'off',
-      'no-duplicate-imports': 'off', // confilict with @typescript-eslint/consistent-type-imports
       'no-invalid-this': 'off',
       'no-loop-func': 'off',
       'no-magic-numbers': 'off',
@@ -102,10 +118,12 @@ export const tsStrict = pluginTs.config(
 export function ts({
   disableTypeChecked = false,
   parserOptions = {},
+  strict = true,
   ...config
 }: Pick<ConfigWithExtends, 'extends' | 'rules'> & {
   disableTypeChecked?: boolean;
   parserOptions?: false | Linter.ParserOptions;
+  strict?: boolean;
 }) {
   return pluginTs.config(
     parserOptions
@@ -118,7 +136,7 @@ export function ts({
           },
         }
       : {},
-    tsStrict,
+    strict ? tsStrict : tsRecommended,
     config,
     disableTypeChecked
       ? {
