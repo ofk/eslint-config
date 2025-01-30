@@ -8,6 +8,7 @@ import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginReactRefresh from 'eslint-plugin-react-refresh';
+import pluginUnicorn from 'eslint-plugin-unicorn';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import pluginTs from 'typescript-eslint';
 import { expect, test } from 'vitest';
@@ -22,6 +23,7 @@ function createConfig(options: Parameters<typeof defineConfig>[0]) {
     perfectionist: false,
     react: false,
     ts: false,
+    unicorn: false,
     unusedImports: false,
     vitest: false,
     ...options,
@@ -89,6 +91,7 @@ test('have the right rule boundaries', () => {
     'react-refresh/',
     'react/',
   ]);
+  expect(getRulePrefixes(createConfig({ unicorn: {} }))).toEqual(['unicorn/']);
   expect(getRulePrefixes(createConfig({ vitest: {} }))).toEqual(['vitest/']);
   expect(getRulePrefixes(createConfig({ perfectionist: {} }))).toEqual(['perfectionist/']);
 });
@@ -118,6 +121,27 @@ test('define all rules', () => {
   expect(diffRules([getAllRules('jsx-a11y/', pluginJsxA11y)], createConfig({ react: {} }))).toEqual(
     [],
   );
+  expect(
+    diffRules([getAllRules('unicorn/', pluginUnicorn)], createConfig({ unicorn: {} })),
+  ).toEqual([
+    'unicorn/import-index',
+    'unicorn/no-array-instanceof',
+    'unicorn/no-fn-reference-in-iterator',
+    'unicorn/no-reduce',
+    'unicorn/no-unsafe-regex',
+    'unicorn/prefer-dataset',
+    'unicorn/prefer-event-key',
+    'unicorn/prefer-exponentiation-operator',
+    'unicorn/prefer-flat-map',
+    'unicorn/prefer-node-append',
+    'unicorn/prefer-node-remove',
+    'unicorn/prefer-object-has-own',
+    'unicorn/prefer-replace-all',
+    'unicorn/prefer-starts-ends-with',
+    'unicorn/prefer-text-content',
+    'unicorn/prefer-trim-start-end',
+    'unicorn/regex-shorthand',
+  ]);
   expect(diffRules([getAllRules('vitest/', pluginVitest)], createConfig({ vitest: {} }))).toEqual(
     [],
   );

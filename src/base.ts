@@ -11,6 +11,7 @@ import {
   unusedImportsStrict,
   vitest,
 } from './configs';
+import { unicornRecommended } from './configs/unicorn';
 
 export default function defineBaseConfig({
   eslintComments: eslintCommentsOptions = {},
@@ -20,6 +21,7 @@ export default function defineBaseConfig({
   perfectionist: perfectionistOptions = {},
   settings,
   ts: tsOptions = {},
+  unicorn: unicornOptions = {},
   unusedImports: unusedImportsOptions = {},
   vitest: vitestOptions = {},
   ...config
@@ -29,6 +31,7 @@ export default function defineBaseConfig({
   js?: false | Parameters<typeof js>[0];
   perfectionist?: false | {};
   ts?: false | Parameters<typeof ts>[0];
+  unicorn?: false | {};
   unusedImports?: false | {};
   vitest?: false | Parameters<typeof vitest>[0];
 } = {}) {
@@ -42,6 +45,7 @@ export default function defineBaseConfig({
     eslintCommentsOptions ? eslintCommentsStrict : {},
     vitestOptions ? vitest(vitestOptions) : {},
     perfectionistOptions ? perfectionistStrict : {},
+    unicornOptions ? unicornRecommended : {},
     config,
   );
 }
