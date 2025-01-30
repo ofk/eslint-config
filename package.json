@@ -28,6 +28,66 @@
     "test:vitest": "vitest run"
   },
   "types": "./dist/index.d.ts",
+  "peerDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
+    "@eslint/js": "^9.18.0",
+    "@vitest/eslint-plugin": "^1.0.0",
+    "confusing-browser-globals": "^1.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-perfectionist": "^4.0.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "eslint-plugin-unicorn": "^56.0.0",
+    "eslint-plugin-unused-imports": "^4.1.1",
+    "globals": "^15.4.0",
+    "typescript-eslint": "^8.15.0"
+  },
+  "peerDependenciesMeta": {
+    "@eslint-community/eslint-plugin-eslint-comments": {
+      "optional": true
+    },
+    "@eslint/js": {
+      "optional": true
+    },
+    "@vitest/eslint-plugin": {
+      "optional": true
+    },
+    "confusing-browser-globals": {
+      "optional": true
+    },
+    "eslint-plugin-import": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-perfectionist": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-react-refresh": {
+      "optional": true
+    },
+    "eslint-plugin-unicorn": {
+      "optional": true
+    },
+    "eslint-plugin-unused-imports": {
+      "optional": true
+    },
+    "globals": {
+      "optional": true
+    },
+    "typescript-eslint": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
     "@eslint/js": "^9.19.0",
