@@ -40,7 +40,7 @@ export default function defineBaseConfig({
     ignores ? { ignores } : {},
     jsOptions ? js(jsOptions) : {},
     tsOptions ? ts(tsOptions) : {},
-    importsOptions ? imports({ typescript: Boolean(tsOptions), ...importsOptions }) : {},
+    importsOptions ? imports({ typescript: !!tsOptions, ...importsOptions }) : {},
     unusedImportsOptions ? unusedImportsStrict : {},
     eslintCommentsOptions ? eslintCommentsStrict : {},
     vitestOptions ? vitest(vitestOptions) : {},

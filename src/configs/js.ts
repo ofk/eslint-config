@@ -95,7 +95,7 @@ export const jsStrict = pluginTs.config(
       'no-extend-native': 'error',
       'no-extra-bind': 'error',
       'no-extra-label': 'error',
-      'no-implicit-coercion': 'error',
+      'no-implicit-coercion': ['error', { allow: ['!!'] }],
       'no-implicit-globals': 'off', // disabled for use in esm
       'no-implied-eval': 'error',
       'no-inline-comments': 'off', // allow inline comments
