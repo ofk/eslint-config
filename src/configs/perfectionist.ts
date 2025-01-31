@@ -50,7 +50,7 @@ export const perfectionistStrict = pluginTs.config(
             ['parent', 'sibling', 'index'],
             'object',
             'side-effect',
-            'style',
+            'side-effect-style',
             'unknown',
           ],
           internalPattern: [
