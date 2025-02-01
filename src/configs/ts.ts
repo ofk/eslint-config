@@ -3,35 +3,34 @@ import type { ConfigWithExtends } from 'typescript-eslint';
 
 import pluginTs from 'typescript-eslint';
 
+import { mergeRules } from '../utils';
+
 // see https://typescript-eslint.io/rules/
-const tsRecommendedOverride = pluginTs.config(
+const tsRecommendedOverride = mergeRules(
+  {},
   // override rules in recommended
   {
-    rules: {
-      // override no-empty-object-type in recommended
-      '@typescript-eslint/no-empty-object-type': [
-        'error',
-        { allowInterfaces: 'with-single-extends' },
-      ],
-      // override no-unused-vars in recommended
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-          varsIgnorePattern: '^_',
-        },
-      ],
-    },
+    // override no-empty-object-type in recommended
+    '@typescript-eslint/no-empty-object-type': [
+      'error',
+      { allowInterfaces: 'with-single-extends' },
+    ],
+    // override no-unused-vars in recommended
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+        varsIgnorePattern: '^_',
+      },
+    ],
   },
   // best practices
   {
-    rules: {
-      '@typescript-eslint/consistent-type-exports': 'error',
-      '@typescript-eslint/consistent-type-imports': 'error',
-      'no-duplicate-imports': 'off', // confilict with @typescript-eslint/consistent-type-imports
-    },
+    '@typescript-eslint/consistent-type-exports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
+    'no-duplicate-imports': 'off', // confilict with @typescript-eslint/consistent-type-imports
   },
 );
 

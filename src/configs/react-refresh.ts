@@ -1,5 +1,6 @@
 import pluginReactRefresh from 'eslint-plugin-react-refresh';
-import pluginTs from 'typescript-eslint';
+
+import { mergeRules } from '../utils';
 
 // see https://github.com/ArnaudBarre/eslint-plugin-react-refresh?tab=readme-ov-file#usage
-export const reactRefreshStrict = pluginTs.config(pluginReactRefresh.configs.recommended);
+export const reactRefreshStrict = mergeRules(pluginReactRefresh.configs.recommended);

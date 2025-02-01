@@ -1,8 +1,9 @@
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
-import pluginTs from 'typescript-eslint';
+
+import { mergeRules } from '../utils';
 
 // see https://github.com/sweepline/eslint-plugin-unused-imports?tab=readme-ov-file#usage
-export const unusedImportsStrict = pluginTs.config({
+export const unusedImportsStrict = mergeRules({
   plugins: {
     'unused-imports': pluginUnusedImports,
   },
