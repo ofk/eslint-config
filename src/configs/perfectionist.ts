@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { Linter } from 'eslint';
 
 import pluginPerfectionist from 'eslint-plugin-perfectionist';
@@ -14,24 +13,15 @@ function mergeRuleOptions(
   return rule;
 }
 
-function mergeConfig(config: Linter.Config, options: object): Linter.Config {
-  return {
-    ...config,
-    rules: config.rules
-      ? Object.fromEntries(
-          Object.entries(config.rules).map(([name, rule]) => [
-            name,
-            mergeRuleOptions(rule, options),
-          ]),
-        )
-      : undefined,
-  };
-}
-
 // see https://perfectionist.dev/rules
-const perfectionistRecommended = mergeConfig(pluginPerfectionist.configs['recommended-natural'], {
-  ignoreCase: false,
-});
+const perfectionistRecommended = {
+  ...pluginPerfectionist.configs['recommended-natural'],
+  rules: Object.fromEntries(
+    Object.entries(pluginPerfectionist.configs['recommended-natural'].rules ?? {}).map(
+      ([name, rule]) => [name, mergeRuleOptions(rule, { ignoreCase: false })],
+    ),
+  ),
+};
 
 export const perfectionistStrict = pluginTs.config(
   perfectionistRecommended,
@@ -39,7 +29,7 @@ export const perfectionistStrict = pluginTs.config(
     rules: {
       // see https://perfectionist.dev/rules/sort-imports
       'perfectionist/sort-imports': mergeRuleOptions(
-        perfectionistRecommended.rules!['perfectionist/sort-imports'],
+        perfectionistRecommended.rules['perfectionist/sort-imports'],
         {
           groups: [
             'type',
@@ -60,7 +50,7 @@ export const perfectionistStrict = pluginTs.config(
       ),
       // see https://perfectionist.dev/rules/sort-jsx-props
       'perfectionist/sort-jsx-props': mergeRuleOptions(
-        perfectionistRecommended.rules!['perfectionist/sort-jsx-props'],
+        perfectionistRecommended.rules['perfectionist/sort-jsx-props'],
         {
           customGroups: {
             reserved: '^(?:key|ref)$',
@@ -70,7 +60,7 @@ export const perfectionistStrict = pluginTs.config(
       ),
       // see https://perfectionist.dev/rules/sort-union-types
       'perfectionist/sort-union-types': mergeRuleOptions(
-        perfectionistRecommended.rules!['perfectionist/sort-union-types'],
+        perfectionistRecommended.rules['perfectionist/sort-union-types'],
         {
           groups: ['unknown', 'nullish'],
         },
