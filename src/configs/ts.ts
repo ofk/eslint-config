@@ -138,7 +138,7 @@ export const tsStrict = pluginTs.config(
 );
 
 export function ts({
-  disableTypeChecked = false,
+  disableTypeChecked = true,
   parserOptions = {},
   strict = true,
   ...config
@@ -162,24 +162,7 @@ export function ts({
     config,
     disableTypeChecked
       ? {
-          extends: [
-            pluginTs.configs.disableTypeChecked,
-            // disabled unsafe rules for js files
-            {
-              rules: {
-                '@typescript-eslint/no-unsafe-argument': 'off',
-                '@typescript-eslint/no-unsafe-assignment': 'off',
-                '@typescript-eslint/no-unsafe-call': 'off',
-                '@typescript-eslint/no-unsafe-declaration-merging': 'off',
-                '@typescript-eslint/no-unsafe-enum-comparison': 'off',
-                '@typescript-eslint/no-unsafe-function-type': 'off',
-                '@typescript-eslint/no-unsafe-member-access': 'off',
-                '@typescript-eslint/no-unsafe-return': 'off',
-                '@typescript-eslint/no-unsafe-type-assertion': 'off',
-                '@typescript-eslint/no-unsafe-unary-minus': 'off',
-              },
-            },
-          ],
+          extends: [pluginTs.configs.disableTypeChecked],
           files: ['**/*.{js,jsx,mjs,cjs}'],
         }
       : {},
