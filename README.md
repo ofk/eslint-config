@@ -6,6 +6,12 @@
 
 ```sh
 npm install --save-dev @ofk/eslint-config
+npm install --save-dev $(npm info @ofk/eslint-config peerDependencies --json | jq -r 'to_entries | map("\(.key)@\(.value)") | join(" ")')
+```
+
+or
+
+```sh
 npx install-peerdeps --dev @ofk/eslint-config
 ```
 
@@ -18,7 +24,7 @@ import config from '@ofk/eslint-config';
 export default config();
 ```
 
-Customization is possible.
+You can customize it. For example:
 
 ```js
 import config from '@ofk/eslint-config';
