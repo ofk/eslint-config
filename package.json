@@ -43,7 +43,7 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "eslint-plugin-unicorn": "^56.0.0",
     "eslint-plugin-unused-imports": "^4.1.1",
-    "globals": "^15.4.0",
+    "globals": "^14.0.0",
     "typescript-eslint": "^8.15.0"
   },
   "peerDependenciesMeta": {
@@ -111,7 +111,7 @@
     "eslint-plugin-react-refresh": "^0.4.18",
     "eslint-plugin-unicorn": "^56.0.1",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "globals": "^15.14.0",
+    "globals": "^14.0.0",
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "lint-staged": "^15.4.3",
