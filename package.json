@@ -18,6 +18,8 @@
     "build": "tsup",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
+    "lint:prettier": "prettier --check .",
+    "lint:prettier-package-json": "prettier-package-json --list-different",
     "lint-fix": "run-s lint-fix:*",
     "lint-fix:eslint": "eslint --fix .",
     "lint-fix:prettier": "prettier --write .",
