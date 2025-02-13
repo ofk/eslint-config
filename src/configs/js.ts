@@ -210,16 +210,28 @@ export const jsStrict = mergeRules(
 export function jsGlobals({
   browser = true,
   es2021 = true,
+  es2022 = true,
+  es2023 = true,
+  es2024 = true,
+  es2025 = true,
   node = true,
 }: {
   browser?: boolean;
   es2021?: boolean;
+  es2022?: boolean;
+  es2023?: boolean;
+  es2024?: boolean;
+  es2025?: boolean;
   node?: boolean;
 }) {
   return pluginTs.config({
     languageOptions: {
       globals: {
         ...(es2021 ? globalVariables.es2021 : {}),
+        ...(es2022 ? globalVariables.es2022 : {}),
+        ...(es2023 ? globalVariables.es2023 : {}),
+        ...(es2024 ? globalVariables.es2024 : {}),
+        ...(es2025 ? globalVariables.es2025 : {}),
         ...(browser ? globalVariables.browser : {}),
         ...(node ? globalVariables.node : {}),
       },
