@@ -8,6 +8,7 @@ import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginReactRefresh from 'eslint-plugin-react-refresh';
+import pluginTailwindcss from 'eslint-plugin-tailwindcss';
 import pluginUnicorn from 'eslint-plugin-unicorn';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import pluginTs from 'typescript-eslint';
@@ -90,6 +91,7 @@ test('have the right rule boundaries', () => {
     'react-hooks/',
     'react-refresh/',
     'react/',
+    'tailwindcss/',
   ]);
   expect(getRulePrefixes(createConfig({ unicorn: {} }))).toEqual(['unicorn/']);
   expect(getRulePrefixes(createConfig({ vitest: {} }))).toEqual(['vitest/']);
@@ -121,6 +123,9 @@ test('define all rules', () => {
   expect(diffRules([getAllRules('jsx-a11y/', pluginJsxA11y)], createConfig({ react: {} }))).toEqual(
     [],
   );
+  expect(
+    diffRules([getAllRules('tailwindcss/', pluginTailwindcss)], createConfig({ react: {} })),
+  ).toEqual([]);
   expect(
     diffRules([getAllRules('unicorn/', pluginUnicorn)], createConfig({ unicorn: {} })),
   ).toEqual([

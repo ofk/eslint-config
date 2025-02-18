@@ -6,6 +6,7 @@ export * from './perfectionist';
 export * from './react';
 export * from './react-hooks';
 export * from './react-refresh';
+export * from './tailwindcss';
 export * from './ts';
 export * from './unused-imports';
 export * from './vitest';
