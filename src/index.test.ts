@@ -116,7 +116,6 @@ test('define all rules', () => {
   expect(diffRules([pluginJs.configs.all], createConfig({ js: {} }))).toEqual([]);
   expect(diffRules(pluginTs.configs.all, createConfig({ js: {}, ts: {} }))).toEqual([]);
   expect(diffConfigRules('import/', pluginImport, { imports: {} })).toEqual([
-    'import/enforce-node-protocol-usage',
     'import/imports-first',
   ]);
   expect(diffConfigRules('unused-imports/', pluginUnusedImports, { unusedImports: {} })).toEqual(

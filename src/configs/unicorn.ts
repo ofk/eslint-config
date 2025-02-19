@@ -37,7 +37,6 @@ export const unicornRecommended = mergeRules(
     'unicorn/prefer-global-this': 'off', // discarded
     'unicorn/prefer-json-parse-buffer': 'off', // not recommended
     'unicorn/prefer-keyboard-event-key': 'off', // allow keyCode
-    'unicorn/prefer-node-protocol': 'off', // disabled for use import/enforce-node-protocol-usage
     'unicorn/prefer-string-raw': 'off', // disallow String.raw
     'unicorn/prefer-structured-clone': 'off', // disallow structuredClone
     'unicorn/prefer-switch': 'off', // discarded
