@@ -47,12 +47,11 @@ function getRules(configArray: ConfigArray): Record<string, string> {
   return rules;
 }
 
-function getAllRules(prefix: string, plugin: ESLint.Plugin): ConfigArray[number] {
-  return {
-    rules: Object.fromEntries(
-      Object.keys(plugin.rules ?? {}).map((rule) => [`${prefix}${rule}`, 'off']),
-    ),
-  };
+function getPluginConfig(prefix: string, plugin: ESLint.Plugin): ConfigArray {
+  const rules: ConfigArray[number]['rules'] = Object.fromEntries(
+    Object.keys(plugin.rules ?? {}).map((rule) => [`${prefix}${rule}`, 'off']),
+  );
+  return [{ rules }];
 }
 
 function getRulePrefixes(configArray: ConfigArray): string[] {
@@ -68,9 +67,26 @@ function getRulePrefixes(configArray: ConfigArray): string[] {
   return [...prefixes].toSorted();
 }
 
+function getConfigPrefixes(options: Parameters<typeof createConfig>[0]): string[] {
+  return getRulePrefixes(createConfig(options));
+}
+
 function diffRules(a: ConfigArray, b: ConfigArray): string[] {
   return [
     ...new Set(Object.keys(getRules(a))).difference(new Set(Object.keys(getRules(b)))),
+  ].toSorted();
+}
+
+function diffConfigRules(
+  prefix: string,
+  plugin: ESLint.Plugin,
+  options: Parameters<typeof createConfig>[0],
+): string[] {
+  const rules = Object.keys(getRules(createConfig(options)));
+  const pluginRules = Object.keys(getRules(getPluginConfig(prefix, plugin)));
+  return [
+    ...new Set(pluginRules).difference(new Set(rules)),
+    ...new Set(rules.filter((k) => k.startsWith(prefix))).difference(new Set(pluginRules)),
   ].toSorted();
 }
 
@@ -79,56 +95,42 @@ test('load config', () => {
 });
 
 test('have the right rule boundaries', () => {
-  expect(getRulePrefixes(createConfig({ js: {} }))).toEqual([]);
-  expect(getRulePrefixes(createConfig({ ts: {} }))).toEqual(['@typescript-eslint/']);
-  expect(getRulePrefixes(createConfig({ imports: {} }))).toEqual(['import/']);
-  expect(getRulePrefixes(createConfig({ unusedImports: {} }))).toEqual(['unused-imports/']);
-  expect(getRulePrefixes(createConfig({ eslintComments: {} }))).toEqual([
-    '@eslint-community/eslint-comments/',
-  ]);
-  expect(getRulePrefixes(createConfig({ react: {} }))).toEqual([
+  expect(getConfigPrefixes({ js: {} })).toEqual([]);
+  expect(getConfigPrefixes({ ts: {} })).toEqual(['@typescript-eslint/']);
+  expect(getConfigPrefixes({ imports: {} })).toEqual(['import/']);
+  expect(getConfigPrefixes({ unusedImports: {} })).toEqual(['unused-imports/']);
+  expect(getConfigPrefixes({ eslintComments: {} })).toEqual(['@eslint-community/eslint-comments/']);
+  expect(getConfigPrefixes({ react: {} })).toEqual([
     'jsx-a11y/',
     'react-hooks/',
     'react-refresh/',
     'react/',
     'tailwindcss/',
   ]);
-  expect(getRulePrefixes(createConfig({ unicorn: {} }))).toEqual(['unicorn/']);
-  expect(getRulePrefixes(createConfig({ vitest: {} }))).toEqual(['vitest/']);
-  expect(getRulePrefixes(createConfig({ perfectionist: {} }))).toEqual(['perfectionist/']);
+  expect(getConfigPrefixes({ unicorn: {} })).toEqual(['unicorn/']);
+  expect(getConfigPrefixes({ vitest: {} })).toEqual(['vitest/']);
+  expect(getConfigPrefixes({ perfectionist: {} })).toEqual(['perfectionist/']);
 });
 
 test('define all rules', () => {
   expect(diffRules([pluginJs.configs.all], createConfig({ js: {} }))).toEqual([]);
   expect(diffRules(pluginTs.configs.all, createConfig({ js: {}, ts: {} }))).toEqual([]);
-  expect(diffRules([getAllRules('import/', pluginImport)], createConfig({ imports: {} }))).toEqual([
+  expect(diffConfigRules('import/', pluginImport, { imports: {} })).toEqual([
+    'import/enforce-node-protocol-usage',
     'import/imports-first',
   ]);
-  expect(
-    diffRules(
-      [getAllRules('unused-imports/', pluginUnusedImports)],
-      createConfig({ unusedImports: {} }),
-    ),
-  ).toEqual([]);
-  expect(diffRules([getAllRules('react/', pluginReact)], createConfig({ react: {} }))).toEqual([
+  expect(diffConfigRules('unused-imports/', pluginUnusedImports, { unusedImports: {} })).toEqual(
+    [],
+  );
+  expect(diffConfigRules('react/', pluginReact, { react: {} })).toEqual([
     'react/jsx-sort-default-props',
     'react/jsx-space-before-closing',
   ]);
-  expect(
-    diffRules([getAllRules('react-hooks/', pluginReactHooks)], createConfig({ react: {} })),
-  ).toEqual([]);
-  expect(
-    diffRules([getAllRules('react-refresh/', pluginReactRefresh)], createConfig({ react: {} })),
-  ).toEqual([]);
-  expect(diffRules([getAllRules('jsx-a11y/', pluginJsxA11y)], createConfig({ react: {} }))).toEqual(
-    [],
-  );
-  expect(
-    diffRules([getAllRules('tailwindcss/', pluginTailwindcss)], createConfig({ react: {} })),
-  ).toEqual([]);
-  expect(
-    diffRules([getAllRules('unicorn/', pluginUnicorn)], createConfig({ unicorn: {} })),
-  ).toEqual([
+  expect(diffConfigRules('react-hooks/', pluginReactHooks, { react: {} })).toEqual([]);
+  expect(diffConfigRules('react-refresh/', pluginReactRefresh, { react: {} })).toEqual([]);
+  expect(diffConfigRules('jsx-a11y/', pluginJsxA11y, { react: {} })).toEqual([]);
+  expect(diffConfigRules('tailwindcss/', pluginTailwindcss, { react: {} })).toEqual([]);
+  expect(diffConfigRules('unicorn/', pluginUnicorn, { unicorn: {} })).toEqual([
     'unicorn/import-index',
     'unicorn/no-array-instanceof',
     'unicorn/no-fn-reference-in-iterator',
@@ -147,7 +149,5 @@ test('define all rules', () => {
     'unicorn/prefer-trim-start-end',
     'unicorn/regex-shorthand',
   ]);
-  expect(diffRules([getAllRules('vitest/', pluginVitest)], createConfig({ vitest: {} }))).toEqual(
-    [],
-  );
+  expect(diffConfigRules('vitest/', pluginVitest, { vitest: {} })).toEqual([]);
 });
