@@ -127,23 +127,7 @@ test('define all rules', () => {
   expect(diffConfigRules('react-refresh/', pluginReactRefresh, { react: {} })).toEqual([]);
   expect(diffConfigRules('jsx-a11y/', pluginJsxA11y, { react: {} })).toEqual([]);
   expect(diffConfigRules('unicorn/', pluginUnicorn, { unicorn: {} })).toEqual([
-    'unicorn/import-index',
-    'unicorn/no-array-instanceof',
-    'unicorn/no-fn-reference-in-iterator',
-    'unicorn/no-reduce',
-    'unicorn/no-unsafe-regex',
-    'unicorn/prefer-dataset',
-    'unicorn/prefer-event-key',
-    'unicorn/prefer-exponentiation-operator',
-    'unicorn/prefer-flat-map',
-    'unicorn/prefer-node-append',
-    'unicorn/prefer-node-remove',
-    'unicorn/prefer-object-has-own',
-    'unicorn/prefer-replace-all',
-    'unicorn/prefer-starts-ends-with',
-    'unicorn/prefer-text-content',
-    'unicorn/prefer-trim-start-end',
-    'unicorn/regex-shorthand',
+    'unicorn/no-instanceof-array',
   ]);
   expect(diffConfigRules('vitest/', pluginVitest, { vitest: {} })).toEqual([]);
 });
