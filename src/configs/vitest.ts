@@ -48,7 +48,7 @@ export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/prefer-mock-promise-shorthand': 'error',
   'vitest/prefer-snapshot-hint': 'error',
   'vitest/prefer-spy-on': 'error',
-  'vitest/prefer-strict-boolean-matchers': 'error',
+  'vitest/prefer-strict-boolean-matchers': 'off', // conflict with vitest/prefer-to-be-truthy
   'vitest/prefer-strict-equal': 'error',
   'vitest/prefer-to-be': 'error',
   'vitest/prefer-to-be-falsy': 'error',
