@@ -60,7 +60,7 @@ export const importsStrict = mergeRules(
   {
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
     'import/dynamic-import-chunkname': 'off', // don't use webpack
-    'import/exports-last': 'error',
+    'import/exports-last': 'off', // discarded
     'import/extensions': [
       'error',
       'ignorePackages',
