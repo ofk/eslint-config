@@ -22,7 +22,8 @@ export const importsStrict = mergeRules(
           'spec/**',
           '**/__tests__/**',
           '**/__mocks__/**',
-          '**/*{.,_}{test,spec}.*',
+          '**/*_{test,spec}.*',
+          '**/*.{test,spec,stories}.*',
           'test.*',
           'test-*.*',
           '*.{config,setup,conf}.{js,ts,mjs,mts,cjs,cts}',
@@ -118,6 +119,8 @@ export function imports({
         '*.{config,setup,conf}.{js,ts,mjs,mts,cjs,cts}',
         '*.{config,setup,conf}.*.{js,ts,mjs,mts,cjs,cts}',
         '.*rc.{js,ts,mjs,mts,cjs,cts}',
+        '.storybook/**/*',
+        '**/*.stories.*',
         ...(defaultExportFiles || []),
       ],
       rules: {
