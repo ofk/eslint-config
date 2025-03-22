@@ -62,7 +62,7 @@ export const reactStrict = mergeRules(pluginReact.configs.flat.recommended ?? {}
   'react/jsx-no-leaked-render': ['error', { validStrategies: ['ternary'] }],
   'react/jsx-no-literals': 'off',
   'react/jsx-no-script-url': ['error', [{ name: 'Link', props: ['to'] }]],
-  'react/jsx-no-useless-fragment': 'error',
+  'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
   'react/jsx-one-expression-per-line': ['error', { allow: 'single-child' }],
   'react/jsx-pascal-case': ['error', { allowAllCaps: true }],
   'react/jsx-props-no-multi-spaces': 'error',

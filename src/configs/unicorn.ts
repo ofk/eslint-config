@@ -27,12 +27,13 @@ export const unicornRecommended = mergeRules(
     'unicorn/no-array-reduce': 'off', // allow array reduce
     'unicorn/no-console-spaces': 'off', // discarded
     'unicorn/no-for-loop': 'off', // disallow for-of
-    'unicorn/no-keyword-prefix': 'error',
+    'unicorn/no-keyword-prefix': ['error', { disallowedPrefixes: ['new'] }], // allow className
     'unicorn/no-magic-array-flat-depth': 'off', // allow magic numbers
     'unicorn/no-null': 'off', // allow null
     'unicorn/no-typeof-undefined': 'off', // discarded
     'unicorn/no-unnecessary-polyfills': 'off', // skip validate polyfills
     'unicorn/no-unused-properties': 'off', // not recommended
+    'unicorn/no-useless-undefined': ['error', { checkArguments: false }], // allow undefined in arguments
     'unicorn/numeric-separators-style': 'off', // disabled style rules
     'unicorn/prefer-global-this': 'off', // discarded
     'unicorn/prefer-json-parse-buffer': 'off', // not recommended
