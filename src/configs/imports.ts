@@ -1,6 +1,7 @@
 import type { ConfigWithExtends } from 'typescript-eslint';
 
-import pluginImport from 'eslint-plugin-import';
+// eslint-disable-next-line import/no-namespace
+import * as pluginImport from 'eslint-plugin-import';
 import pluginTs from 'typescript-eslint';
 
 import { mergeRules } from '../utils';

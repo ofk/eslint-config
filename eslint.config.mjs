@@ -1,6 +1,6 @@
+/* eslint-disable import/no-unresolved */
+import defineConfig from '@ofk/eslint-config';
 import configPrettier from 'eslint-config-prettier';
-
-import defineConfig from './src';
 
 export default defineConfig({
   extends: [configPrettier],
