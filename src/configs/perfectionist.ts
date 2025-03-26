@@ -5,11 +5,12 @@ import { mergeRuleOptions, mergeRules } from '../utils';
 // see https://perfectionist.dev/rules
 const perfectionistRecommended = {
   ...pluginPerfectionist.configs['recommended-natural'],
-  rules: Object.fromEntries(
-    Object.entries(pluginPerfectionist.configs['recommended-natural'].rules ?? {}).map(
-      ([name, rule]) => [name, mergeRuleOptions(rule, { ignoreCase: false })],
-    ),
-  ),
+  rules: pluginPerfectionist.configs['recommended-natural'].rules ?? {},
+  settings: {
+    perfectionist: {
+      ignoreCase: false,
+    },
+  },
 };
 
 export const perfectionistStrict = mergeRules(
