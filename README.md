@@ -1,6 +1,10 @@
 # @ofk/eslint-config
 
-@ofk/eslint-config is an eslint config that enables more rules than recommended.
+[![npm](https://img.shields.io/npm/v/@ofk/eslint-config)](https://npmjs.com/package/@ofk/eslint-config)
+![ci](https://github.com/ofk/eslint-config/actions/workflows/ci.yml/badge.svg)
+
+@ofk/eslint-config is an eslint config that enables **more rules than recommended**.
+This is the base for [@ofk/eslint-config-recommend](https://npmjs.com/package/@ofk/eslint-config-recommend).
 
 ## Install
 
