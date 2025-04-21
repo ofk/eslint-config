@@ -5,9 +5,9 @@ import { mergeRules } from '../utils';
 // see https://github.com/sindresorhus/eslint-plugin-unicorn?tab=readme-ov-file#rules
 export const unicornRecommended = mergeRules(
   {
-    ...pluginUnicorn.configs['flat/recommended'],
+    ...pluginUnicorn.configs.recommended,
     rules: Object.fromEntries(
-      Object.entries(pluginUnicorn.configs['flat/recommended'].rules ?? {}).filter(
+      Object.entries(pluginUnicorn.configs.recommended.rules ?? {}).filter(
         ([_key, value]) => value !== 'off',
       ),
     ),
