@@ -36,8 +36,10 @@ export const unicornRecommended = mergeRules(
     'unicorn/no-useless-undefined': ['error', { checkArguments: false }], // allow undefined in arguments
     'unicorn/numeric-separators-style': 'off', // disabled style rules
     'unicorn/prefer-global-this': 'off', // discarded
+    'unicorn/prefer-import-meta-properties': 'off', // not recommended
     'unicorn/prefer-json-parse-buffer': 'off', // not recommended
     'unicorn/prefer-keyboard-event-key': 'off', // allow keyCode
+    'unicorn/prefer-node-protocol': 'off', // disabled for use import/enforce-node-protocol-usage
     'unicorn/prefer-string-raw': 'off', // disallow String.raw
     'unicorn/prefer-structured-clone': 'off', // disallow structuredClone
     'unicorn/prefer-switch': 'off', // discarded

@@ -127,7 +127,11 @@ test('define all rules', () => {
   expect(diffConfigRules('react-refresh/', pluginReactRefresh, { react: {} })).toEqual([]);
   expect(diffConfigRules('jsx-a11y/', pluginJsxA11y, { react: {} })).toEqual([]);
   expect(diffConfigRules('unicorn/', pluginUnicorn, { unicorn: {} })).toEqual([
+    'unicorn/no-array-push-push',
     'unicorn/no-instanceof-array',
+    'unicorn/no-length-as-slice-end',
   ]);
-  expect(diffConfigRules('vitest/', pluginVitest, { vitest: {} })).toEqual([]);
+  expect(
+    diffConfigRules('vitest/', pluginVitest as unknown as ESLint.Plugin, { vitest: {} }),
+  ).toEqual([]);
 });

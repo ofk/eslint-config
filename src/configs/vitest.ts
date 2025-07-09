@@ -9,6 +9,7 @@ import { mergeRules } from '../utils';
 export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/consistent-test-filename': 'off',
   'vitest/consistent-test-it': 'error',
+  'vitest/consistent-vitest-vi': 'error',
   'vitest/max-expects': 'off',
   'vitest/max-nested-describe': 'off',
   'vitest/no-alias-methods': 'error',
@@ -20,6 +21,7 @@ export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/no-duplicate-hooks': 'error',
   'vitest/no-focused-tests': 'off',
   'vitest/no-hooks': 'off',
+  'vitest/no-importing-vitest-globals': 'off', // conflict with vitest/prefer-importing-vitest-globals
   'vitest/no-interpolation-in-snapshots': 'error',
   'vitest/no-large-snapshots': 'off',
   'vitest/no-mocks-import': 'off',
@@ -36,6 +38,8 @@ export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/padding-around-describe-blocks': 'error',
   'vitest/padding-around-expect-groups': 'error',
   'vitest/padding-around-test-blocks': 'error',
+  'vitest/prefer-called-once': 'warn',
+  'vitest/prefer-called-times': 'off', // conflict with vitest/prefer-called-once
   'vitest/prefer-called-with': 'error',
   'vitest/prefer-comparison-matcher': 'error',
   'vitest/prefer-describe-function-title': 'error',
@@ -45,6 +49,7 @@ export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/prefer-expect-resolves': 'error',
   'vitest/prefer-hooks-in-order': 'error',
   'vitest/prefer-hooks-on-top': 'error',
+  'vitest/prefer-importing-vitest-globals': 'warn',
   'vitest/prefer-lowercase-title': 'error',
   'vitest/prefer-mock-promise-shorthand': 'error',
   'vitest/prefer-snapshot-hint': 'error',
@@ -64,6 +69,7 @@ export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/require-to-throw-message': 'error',
   'vitest/require-top-level-describe': 'error',
   'vitest/valid-expect-in-promise': 'error',
+  'vitest/warn-todo': 'off',
 });
 
 export function vitest(config: Pick<ConfigWithExtends, 'extends' | 'rules'>) {
