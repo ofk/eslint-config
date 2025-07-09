@@ -47,7 +47,7 @@ export const importsStrict = mergeRules(
   },
   // https://github.com/import-js/eslint-plugin-import?tab=readme-ov-file#static-analysis
   {
-    'import/enforce-node-protocol-usage': 'error',
+    'import/enforce-node-protocol-usage': ['error', 'always'],
     'import/no-absolute-path': 'error',
     'import/no-cycle': 'error',
     'import/no-dynamic-require': 'error',

@@ -7,6 +7,7 @@ module.exports = defineConfig({
   ignores: ['dist/'],
   imports: {
     defaultExportFiles: ['src/*.ts'],
+    node: true,
   },
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
