@@ -42,7 +42,7 @@ export const vitestStrict = mergeRules(pluginVitest.configs.recommended, {
   'vitest/prefer-called-times': 'off', // conflict with vitest/prefer-called-once
   'vitest/prefer-called-with': 'error',
   'vitest/prefer-comparison-matcher': 'error',
-  'vitest/prefer-describe-function-title': 'error',
+  'vitest/prefer-describe-function-title': 'off', // conflict with vitest/valid-title
   'vitest/prefer-each': 'error',
   'vitest/prefer-equality-matcher': 'error',
   'vitest/prefer-expect-assertions': 'off', // deprecated
